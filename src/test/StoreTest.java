@@ -33,7 +33,7 @@ public class StoreTest {
 
     @Test
     public void rentMovieTest() {
-        store.rentMovie("Fight Club");
+        store.rentMovie("Forrest Gump");
         assertFalse(store.getStore().get(0).isAvailable());
     }
 
