@@ -33,6 +33,14 @@ public class Store {
         this.movies.removeIf(movie -> (movie.getName()).equals(name));
     }
 
+    public void rentMovie(String name) {
+        for (int i = 0; i < this.movies.size(); i++) {
+            if ((this.movies.get(i).getName()).equals(name)) {
+                this.movies.get(i).setAvailable(false);
+            }
+        }
+    }
+
     public String toString() {
         String temp = "";
         for (int i = 0; i < this.movies.size(); i++) {
