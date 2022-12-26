@@ -21,19 +21,13 @@ public class StoreTest {
     }
 
     @Test
-    public void movieAdded() {
-        assertTrue(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
-    }
-
-    @Test
     public void sellMovieTest() {
         store.sellMovie("Fight Club");
         assertFalse(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
     }
 
     @Test
-    public void returnMovieTest() {
-        store.returnMovie("Fight Club");
+    public void movieAdded() {
         assertTrue(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
     }
 
@@ -41,6 +35,18 @@ public class StoreTest {
     public void rentMovieTest() {
         store.rentMovie("Forrest Gump");
         assertFalse(store.getStore().get(0).isAvailable());
+    }
+
+    @Test
+    public void returnMovieTest() {
+        store.returnMovie("Forrest Gump");
+        assertTrue(store.getStore().get(0).isAvailable());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void movieNotInStock() {
+        store.rentMovie("Forrest Gump");
+        store.sellMovie("Forrest Gump");
     }
 
 }
