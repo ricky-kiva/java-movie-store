@@ -32,6 +32,12 @@ public class StoreTest {
     }
 
     @Test
+    public void returnMovieTest() {
+        store.returnMovie("Fight Club");
+        assertTrue(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
+    }
+
+    @Test
     public void rentMovieTest() {
         store.rentMovie("Forrest Gump");
         assertFalse(store.getStore().get(0).isAvailable());
