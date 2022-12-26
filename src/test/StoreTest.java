@@ -28,8 +28,13 @@ public class StoreTest {
     @Test
     public void sellMovieTest() {
         store.sellMovie("Fight Club");
-        System.out.println(store.toString());
         assertFalse(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
+    }
+
+    @Test
+    public void rentMovieTest() {
+        store.rentMovie("Fight Club");
+        assertFalse(store.getStore().get(0).isAvailable());
     }
 
 }
