@@ -35,19 +35,26 @@ public class Store {
     }
 
     public void rentMovie(String name) {
-
         int index = this.getMovieIndex(name);
         if (index >= 0 || index < this.movies.size()) {
             this.movies.get(index).setAvailable(false);
         } else {
-            System.out.println("We got no movie by that name.");
+            System.out.println("We got no movie as such by this time.");
         }
-        
+    }
+
+    public void returnMovie(String name) {
+        int index = this.getMovieIndex(name);
+        if (index >= 0 || index < this.movies.size()) {
+            this.movies.get(index).setAvailable(true);
+        } else {
+            System.out.println("Nothing to return.");
+        }
     }
 
     public int getMovieIndex(String name) {
         return IntStream.range(0, this.movies.size())
-        .filter(index -> this.movies.get(index).getName() == "name")
+        .filter(index -> this.movies.get(index).getName() == name)
         .findFirst()
         .orElse(-1);
     }
