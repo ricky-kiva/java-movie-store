@@ -12,8 +12,8 @@ public class Movie {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name must contain a value");
         }
-        if (!(format.equals("DVD") || format.equals("Blue-Ray"))) {
-            throw new IllegalArgumentException("format must be DVD or Blue-Ray");
+        if (!(format.equals("DVD") || format.equals("Bluray"))) {
+            throw new IllegalArgumentException("format must be DVD or Bluray");
         }
         if (rating < 0 || rating > 10) {
             throw new IllegalArgumentException("Invalid rating");
@@ -21,8 +21,8 @@ public class Movie {
         this.name = name;
         this.format = format;
         this.rating = rating;
-        this.sellingPrice = format.equals("Blue-Ray") ? 4.25 : 2.25;
-        this.rentalPrice = format.equals("Blue-Ray") ? 1.99 : 0.99;
+        this.sellingPrice = format.equals("Bluray") ? 4.25 : 2.25;
+        this.rentalPrice = format.equals("Bluray") ? 1.99 : 0.99;
         this.isAvailable = true;
     }
 
@@ -67,12 +67,12 @@ public class Movie {
     }
 
     public void setFormat(String format) {
-        if (!(format.equals("DVD") || format.equals("Blue-Ray"))) {
-            throw new IllegalArgumentException("format must be DVD or Blue-Ray");
+        if (!(format.equals("DVD") || format.equals("Bluray"))) {
+            throw new IllegalArgumentException("format must be DVD or Bluray");
         }
         this.format = format;
-        setSellingPrice(format.equals("Blue-Ray") ? 4.25 : 2.25);
-        setRentalPrice(format.equals("Blue-Ray") ? 1.99 : 0.99);
+        setSellingPrice(format.equals("Bluray") ? 4.25 : 2.25);
+        setRentalPrice(format.equals("Bluray") ? 1.99 : 0.99);
     }
 
     public void setRating(double rating) {
