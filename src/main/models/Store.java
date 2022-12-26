@@ -30,12 +30,7 @@ public class Store {
     }
 
     public void sellMovie(String name) {
-        
-        for (int i = 0; i < this.movies.size(); i++)  {
-            if ((this.movies.get(i).getName()).equals(name)) {
-                this.movies.remove(i);
-            }
-        }
+        this.movies.removeIf(movie -> (movie.getName()).equals(name));
     }
 
     public String toString() {
