@@ -29,6 +29,15 @@ public class Store {
         this.movies.add(new Movie(movie));
     }
 
+    public void sellMovie(String name) {
+        
+        for (int i = 0; i < this.movies.size(); i++)  {
+            if ((this.movies.get(i).getName()).equals(name)) {
+                this.movies.remove(i);
+            }
+        }
+    }
+
     public String toString() {
         String temp = "";
         for (int i = 0; i < this.movies.size(); i++) {
