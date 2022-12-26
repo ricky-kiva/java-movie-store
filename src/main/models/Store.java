@@ -9,6 +9,14 @@ public class Store {
         this.movies = new ArrayList<Movie>();
     }
 
+    public Store(Store source) {
+        this.movies = new ArrayList<>(source.movies);
+    }
+
+    public ArrayList<Movie> getStore() {
+        return this.movies;
+    }
+
     public Movie getMovie(int index) {
         return new Movie(this.movies.get(index));
     }
