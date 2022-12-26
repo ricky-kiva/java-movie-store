@@ -31,7 +31,12 @@ public class Store {
     }
 
     public void sellMovie(String name) {
-        this.movies.removeIf(movie -> (movie.getName()).equals(name));
+        if (!(this.movies.get(this.getMovieIndex(name)).isAvailable())) {
+            System.out.println("The movie is on rent.");
+            throw new IllegalStateException();
+        } else {
+            this.movies.removeIf(movie -> (movie.getName()).equals(name));
+        }
     }
 
     public void rentMovie(String name) {
