@@ -2,25 +2,34 @@ package test;
 
 import main.models.Movie;
 import main.models.Store;
-import main.*;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Before;
 
 public class StoreTest {
 
-    static Store store = new Store();
+    Store store;
 
     @Before
-    public static void setup() {
+    public void setup() {
+        store = new Store();
         store.addMovie(new Movie("Forrest Gump", "Bluray", 9.4));
         store.addMovie(new Movie("Fight Club", "DVD", 9.1));
     }
 
     @Test
-    public static void movieAdded() {
-        // assertTrue(store.contains(new Movie("Fight Club", "DVD", 9.1)));
+    public void movieAdded() {
+        assertTrue(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
+    }
+
+    @Test
+    public void sellMovieTest() {
+        store.sellMovie("Fight Club");
+        System.out.println(store.toString());
+        assertFalse(store.getStore().contains(new Movie("Fight Club", "DVD", 9.1)));
     }
 
 }
