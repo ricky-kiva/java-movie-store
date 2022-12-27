@@ -46,8 +46,13 @@ public class Main {
                     break;
                 case "buy":
                     choice = caseBuy(choice, scan, store);
+                    break;
                 case "rent":
                     choice = caseRent(choice, scan, store);
+                    break;
+                case "return":
+                    choice = caseReturn(choice, scan, store);
+                    break;
                 default:
                     choice = "exit";
                     break;
@@ -103,7 +108,29 @@ public class Main {
         while(choice.equals("rent")) {
 
             String movieName = getMovieFromStore(scan, store);
+            if (!checkAvailable(store, movieName)) {
+                System.out.println("Movie is rented!\n");
+                choice = getChoice(scan, choice);
+                return choice;
+            }
             store.rentMovie(movieName);
+    
+            displayStore(store);
+            choice = getChoice(scan, choice);
+        }
+        return choice;
+    }
+
+    public static String caseReturn(String choice, Scanner scan, Store store) {
+        while(choice.equals("return")) {
+
+            String movieName = getMovieFromStore(scan, store);
+            if (checkAvailable(store, movieName)) {
+                System.out.println("It's still on the store!\n");
+                choice = getChoice(scan, choice);
+                return choice;
+            }
+            store.returnMovie(movieName);
     
             displayStore(store);
             choice = getChoice(scan, choice);
@@ -169,6 +196,10 @@ public class Main {
             }
             return movieName;
         }
+    }
+
+    public static boolean checkAvailable(Store store, String movieName) {
+        return store.getMovie(store.getMovieIndex(movieName)).isAvailable();
     }
 
     public static void displayStore(Store store) {
