@@ -28,11 +28,34 @@ public class Main {
         displayStore(store);
 
         Scanner scan = new Scanner(System.in);
-        String cont = scan.next();
+        String choice = scan.next();
+        choice = choice.toLowerCase();
 
-        while (cont.equals("continue")) {
+        while (
+            choice.equals("edit") || 
+            choice.equals("add") ||
+            choice.equals("buy") ||
+            choice.equals("rent")
+        ) {
+            switch(choice) {
+                case "edit":
+                    caseEdit(choice, scan, store);
+                    break;
+                case "add":
+                    caseAdd(choice, scan,store);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        scan.close();
+
+    }
+
+    public static void caseEdit(String choice, Scanner scan, Store store) {
+        while (choice.equals("edit")) {
             
-            System.out.print("\n*Note: Insert any number above index to [Add] movie");
             int index = getIndex(scan);
             scan.nextLine();
 
@@ -41,19 +64,27 @@ public class Main {
             String movieFormat = getMovieFormat(scan);
             double movieRating = getMovieRating(scan);
 
-            if (index < store.getStore().size()) {
-                store.setMovie(index, new Movie(movieName, movieFormat, movieRating));
-            } else {
-                store.addMovie(new Movie(movieName, movieFormat, movieRating));
-            }
+            store.setMovie(index, new Movie(movieName, movieFormat, movieRating));
 
             displayStore(store);
-            cont = scan.next();
+            choice = scan.next();
 
         }
+    }
 
-        scan.close();
+    public static void caseAdd(String choice, Scanner scan, Store store) {
+        while(choice.equals("add")) {
 
+            System.out.print("\nWhat's the name of the movie? ");
+            String movieName = scan.nextLine();
+            String movieFormat = getMovieFormat(scan);
+            double movieRating = getMovieRating(scan);
+    
+            store.addMovie(new Movie(movieName, movieFormat, movieRating));
+    
+            displayStore(store);
+            choice = scan.next();
+        }
     }
 
     public static int getIndex(Scanner scan) {
@@ -107,7 +138,7 @@ public class Main {
         for (int i = 0; i < store.getStore().size(); i++) {
             System.out.println((i+1) + "." + store.getMovie(i));
         }
-        System.out.print("To edit a list, type 'continue': ");
+        System.out.print("Menu (Please choose one):\n>\t[edit]\t[add]\t[buy]\t[rent]\t[exit]\n>\tYour Option: ");
     }
 
 }
