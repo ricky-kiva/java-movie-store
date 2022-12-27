@@ -59,7 +59,7 @@ public class Store {
 
     public int getMovieIndex(String name) {
         return IntStream.range(0, this.movies.size())
-        .filter(index -> this.movies.get(index).getName() == name)
+        .filter(index -> (this.movies.get(index).getName()).equals(name))
         .findFirst()
         .orElse(-1);
     }

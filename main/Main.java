@@ -28,7 +28,7 @@ public class Main {
         displayStore(store);
 
         Scanner scan = new Scanner(System.in);
-        String choice = scan.next();
+        String choice = scan.nextLine();
         choice = choice.toLowerCase();
 
         while (
@@ -55,28 +55,22 @@ public class Main {
 
     public static void caseEdit(String choice, Scanner scan, Store store) {
         while (choice.equals("edit")) {
-            
-            int index = getIndex(scan);
-            scan.nextLine();
 
             System.out.print("\nWhat's the name of the movie? ");
             String movieName = scan.nextLine();
-            String movieFormat = getMovieFormat(scan);
             double movieRating = getMovieRating(scan);
 
-            store.setMovie(index, new Movie(movieName, movieFormat, movieRating));
+            store.getStore().get(store.getMovieIndex(movieName)).setRating(movieRating);
 
             displayStore(store);
             choice = scan.next();
-
         }
     }
 
     public static void caseAdd(String choice, Scanner scan, Store store) {
         while(choice.equals("add")) {
 
-            System.out.print("\nWhat's the name of the movie? ");
-            String movieName = scan.nextLine();
+            String movieName = getMovieName(scan);
             String movieFormat = getMovieFormat(scan);
             double movieRating = getMovieRating(scan);
     
@@ -99,6 +93,18 @@ public class Main {
                 }
             } else {
                 scan.next();
+                continue;
+            }
+        }
+    }
+
+    public static String getMovieName(Scanner scan) {
+        while(true) {
+            System.out.print("\nWhat's the name of the movie? ");
+            String movieName = scan.nextLine();
+            if (!(movieName == null || movieName.isBlank())) {
+                return movieName;
+            } else {
                 continue;
             }
         }
