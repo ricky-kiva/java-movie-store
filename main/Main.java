@@ -8,22 +8,9 @@ public class Main {
     
     public static void main(String[] args) {
 
-        Movie[] arrMovies = new Movie[] {
-            new Movie("The Shawshank Redemption", "Bluray", 9.2),
-            new Movie("The Godfather", "Bluray", 9.1),
-            new Movie("The Lord of the Rings: The Fellowship of the Ring", "DVD", 8.8),
-            new Movie("Schindler's List", "DVD", 8.9),
-            new Movie("The Lord of the Rings: The Return of the King", "Bluray", 8.9),
-            new Movie("The Dark Knight", "Bluray", 9.0),
-            new Movie("Pulp Fiction", "DVD", 8.8)
-        };
-
         Store store = new Store();
 
-        for (Movie movie : arrMovies) {
-            store.addMovie(movie);
-        }
-
+        openStore(store);
         displayStore(store);
 
         Scanner scan = new Scanner(System.in);
@@ -207,6 +194,24 @@ public class Main {
         for (int i = 0; i < store.getStore().size(); i++) {
             System.out.println((i+1) + "." + store.getMovie(i));
         }
+    }
+
+    public static Store openStore(Store store) {
+        Movie[] arrMovies = new Movie[] {
+            new Movie("The Shawshank Redemption", "Bluray", 9.2),
+            new Movie("The Godfather", "Bluray", 9.1),
+            new Movie("The Lord of the Rings: The Fellowship of the Ring", "DVD", 8.8),
+            new Movie("Schindler's List", "DVD", 8.9),
+            new Movie("The Lord of the Rings: The Return of the King", "Bluray", 8.9),
+            new Movie("The Dark Knight", "Bluray", 9.0),
+            new Movie("Pulp Fiction", "DVD", 8.8)
+        };
+
+        for (Movie movie : arrMovies) {
+            store.addMovie(movie);
+        }
+
+        return store;
     }
 
 }
