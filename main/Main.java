@@ -32,18 +32,21 @@ public class Main {
         String choice = getChoice(scan, null);
 
         while (
-            choice.equals("edit") || 
-            choice.equals("add") ||
+            choice.equals("add") || 
+            choice.equals("edit") ||
             choice.equals("buy") ||
-            choice.equals("rent")
+            choice.equals("rent") ||
+            choice.equals("return")
         ) {
             switch(choice) {
-                case "edit":
-                    choice = caseEdit(choice, scan, store);
-                    break;
                 case "add":
                     choice = caseAdd(choice, scan,store);
                     break;
+                case "edit":
+                    choice = caseEdit(choice, scan, store);
+                    break;
+                case "buy":
+                    choice = caseBuy(choice, scan, store);
                 default:
                     break;
             }
@@ -51,26 +54,6 @@ public class Main {
 
         scan.close();
 
-    }
-
-    public static String caseEdit(String choice, Scanner scan, Store store) {
-        while (choice.equals("edit")) {
-
-            String movieName = getMovieName(scan);
-
-            if (store.getMovieIndex(movieName) == -1) {
-                System.out.println("There's no such movie!");
-                continue;
-            }
-
-            double movieRating = getMovieRating(scan);
-
-            store.getStore().get(store.getMovieIndex(movieName)).setRating(movieRating);
-
-            displayStore(store);
-            choice = getChoice(scan, choice);
-        }
-        return choice;
     }
 
     public static String caseAdd(String choice, Scanner scan, Store store) {
@@ -88,13 +71,40 @@ public class Main {
         return choice;
     }
 
+    public static String caseEdit(String choice, Scanner scan, Store store) {
+        while (choice.equals("edit")) {
+
+            String movieName = getMovieFromStore(scan, store);
+            double movieRating = getMovieRating(scan);
+
+            store.getStore().get(store.getMovieIndex(movieName.toLowerCase())).setRating(movieRating);
+
+            displayStore(store);
+            choice = getChoice(scan, choice);
+        }
+        return choice;
+    }
+
+    public static String caseBuy(String choice, Scanner scan, Store store) {
+        while(choice.equals("buy")) {
+
+            String movieName = getMovieFromStore(scan, store);
+            store.sellMovie(movieName);
+    
+            displayStore(store);
+            choice = getChoice(scan, choice);
+        }
+        return choice;
+    }
+
     public static String getChoice(Scanner scan, String choice) {
-        System.out.print("Menu (Please choose one):\n>\t[edit]\t[add]\t[buy]\t[rent]\t[exit]\n>\tYour Option: ");
+        System.out.print("Menu (Please choose one):\n>\t[add]\t[edit]\t[buy]\t[rent]\t[return]\t[exit]\n>\tYour Option: ");
         choice = scan.nextLine();
         choice = choice.toLowerCase();
         return choice;
     }
 
+    /*
     public static int getIndex(Scanner scan) {
         while(true) {
             System.out.print("\nPlease choose which index to change: ");
@@ -111,6 +121,7 @@ public class Main {
             }
         }
     }
+    */
 
     public static String getMovieName(Scanner scan) {
         while(true) {
@@ -151,6 +162,17 @@ public class Main {
                 scan.next();
                 continue;
             }
+        }
+    }
+
+    public static String getMovieFromStore(Scanner scan, Store store) {
+        while(true) {
+            String movieName = getMovieName(scan);
+            if (store.getMovieIndex(movieName.toLowerCase()) == -1) {
+                System.out.println("There's no such movie!");
+                continue;
+            }
+            return movieName;
         }
     }
 
