@@ -39,10 +39,10 @@ public class Main {
         ) {
             switch(choice) {
                 case "edit":
-                    caseEdit(choice, scan, store);
+                    choice = caseEdit(choice, scan, store);
                     break;
                 case "add":
-                    caseAdd(choice, scan,store);
+                    choice = caseAdd(choice, scan,store);
                     break;
                 default:
                     break;
@@ -53,7 +53,7 @@ public class Main {
 
     }
 
-    public static void caseEdit(String choice, Scanner scan, Store store) {
+    public static String caseEdit(String choice, Scanner scan, Store store) {
         while (choice.equals("edit")) {
 
             String movieName = getMovieName(scan);
@@ -70,9 +70,10 @@ public class Main {
             displayStore(store);
             choice = getChoice(scan, choice);
         }
+        return choice;
     }
 
-    public static void caseAdd(String choice, Scanner scan, Store store) {
+    public static String caseAdd(String choice, Scanner scan, Store store) {
         while(choice.equals("add")) {
 
             String movieName = getMovieName(scan);
@@ -84,6 +85,7 @@ public class Main {
             displayStore(store);
             choice = getChoice(scan, choice);
         }
+        return choice;
     }
 
     public static String getChoice(Scanner scan, String choice) {
