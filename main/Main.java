@@ -39,15 +39,13 @@ public class Main {
 
         while (cont.equals("continue")) {
 
-            System.out.print("\nPlease choose which index to change: ");
-            int index = scan.nextInt();
+            int index = getIndex(scan);
             scan.nextLine();
-            index -= 1;
 
             System.out.print("\nWhat's the name of the movie? ");
             String movieName = scan.nextLine();
 
-            System.out.print("\nWhat's the format? ");
+            System.out.print("\nWhat's the format? (Bluray / DVD) ");
             String movieFormat = scan.next();
 
             System.out.print("\nAnd how's the rating? ");
@@ -67,6 +65,20 @@ public class Main {
         }
 
         scan.close();
+
+    }
+
+    public static int getIndex(Scanner scan) {
+        while (true) {
+            System.out.print("\nPlease choose which index to change: ");
+            if (scan.hasNextInt()) {
+                int index = scan.nextInt();
+                return index -= 1;
+            } else {
+                scan.next();
+                continue;
+            }
+        }
 
     }
 
