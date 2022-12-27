@@ -45,8 +45,7 @@ public class Main {
             System.out.print("\nWhat's the name of the movie? ");
             String movieName = scan.nextLine();
 
-            System.out.print("\nWhat's the format? (Bluray / DVD) ");
-            String movieFormat = scan.next();
+            String movieFormat = getMovieFormat(scan);
 
             System.out.print("\nAnd how's the rating? ");
             double movieRating = scan.nextDouble();
@@ -69,7 +68,7 @@ public class Main {
     }
 
     public static int getIndex(Scanner scan) {
-        while (true) {
+        while(true) {
             System.out.print("\nPlease choose which index to change: ");
             if (scan.hasNextInt()) {
                 int index = scan.nextInt();
@@ -79,8 +78,18 @@ public class Main {
                 continue;
             }
         }
-
     }
 
+    public static String getMovieFormat(Scanner scan) {
+        while(true) {
+            System.out.print("\nWhat's the format? (Bluray / DVD) ");
+            String movieFormat = scan.next();
+            if (movieFormat.equals("Bluray") || movieFormat.equals("DVD")) {
+                return movieFormat;
+            } else {
+                continue;
+            }
+        }
+    }
 
 }
