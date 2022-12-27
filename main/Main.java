@@ -28,8 +28,8 @@ public class Main {
         displayStore(store);
 
         Scanner scan = new Scanner(System.in);
-        String choice = scan.nextLine();
-        choice = choice.toLowerCase();
+
+        String choice = getChoice(scan, null);
 
         while (
             choice.equals("edit") || 
@@ -68,7 +68,7 @@ public class Main {
             store.getStore().get(store.getMovieIndex(movieName)).setRating(movieRating);
 
             displayStore(store);
-            choice = scan.next();
+            choice = getChoice(scan, choice);
         }
     }
 
@@ -82,8 +82,15 @@ public class Main {
             store.addMovie(new Movie(movieName, movieFormat, movieRating));
     
             displayStore(store);
-            choice = scan.next();
+            choice = getChoice(scan, choice);
         }
+    }
+
+    public static String getChoice(Scanner scan, String choice) {
+        System.out.print("Menu (Please choose one):\n>\t[edit]\t[add]\t[buy]\t[rent]\t[exit]\n>\tYour Option: ");
+        choice = scan.nextLine();
+        choice = choice.toLowerCase();
+        return choice;
     }
 
     public static int getIndex(Scanner scan) {
@@ -129,9 +136,10 @@ public class Main {
 
     public static double getMovieRating(Scanner scan) {
         while(true) {
-            System.out.print("\nAnd how's the rating? ");
+            System.out.print("\nAnd how's the rating (0-10) ? ");
             if (scan.hasNextDouble()) {
                 double rating = scan.nextDouble();
+                scan.nextLine(); // escape buffer trap
                 if (rating >= 0 && rating <= 10) {
                     return rating;
                 } else {
@@ -149,7 +157,6 @@ public class Main {
         for (int i = 0; i < store.getStore().size(); i++) {
             System.out.println((i+1) + "." + store.getMovie(i));
         }
-        System.out.print("Menu (Please choose one):\n>\t[edit]\t[add]\t[buy]\t[rent]\t[exit]\n>\tYour Option: ");
     }
 
 }
