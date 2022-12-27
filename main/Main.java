@@ -56,8 +56,13 @@ public class Main {
     public static void caseEdit(String choice, Scanner scan, Store store) {
         while (choice.equals("edit")) {
 
-            System.out.print("\nWhat's the name of the movie? ");
-            String movieName = scan.nextLine();
+            String movieName = getMovieName(scan);
+
+            if (store.getMovieIndex(movieName) == -1) {
+                System.out.println("There's no such movie!");
+                continue;
+            }
+
             double movieRating = getMovieRating(scan);
 
             store.getStore().get(store.getMovieIndex(movieName)).setRating(movieRating);
