@@ -24,8 +24,6 @@ public class Main {
             store.addMovie(movie);
         }
 
-        
-
         System.out.println("\n********************************MOVIE STORE*******************************\n");
 
         for (int i = 0; i < store.getStore().size(); i++) {
@@ -44,11 +42,8 @@ public class Main {
 
             System.out.print("\nWhat's the name of the movie? ");
             String movieName = scan.nextLine();
-
             String movieFormat = getMovieFormat(scan);
-
-            System.out.print("\nAnd how's the rating? ");
-            double movieRating = scan.nextDouble();
+            double movieRating = getMovieRating(scan);
 
             store.setMovie(index, new Movie(movieName, movieFormat, movieRating));
 
@@ -72,7 +67,11 @@ public class Main {
             System.out.print("\nPlease choose which index to change: ");
             if (scan.hasNextInt()) {
                 int index = scan.nextInt();
-                return index -= 1;
+                if (index > 0) {
+                    return index;
+                } else {
+                    continue;
+                }
             } else {
                 scan.next();
                 continue;
@@ -87,6 +86,23 @@ public class Main {
             if (movieFormat.equals("Bluray") || movieFormat.equals("DVD")) {
                 return movieFormat;
             } else {
+                continue;
+            }
+        }
+    }
+
+    public static double getMovieRating(Scanner scan) {
+        while(true) {
+            System.out.print("\nAnd how's the rating? ");
+            if (scan.hasNextDouble()) {
+                double rating = scan.nextDouble();
+                if (rating >= 0 && rating <= 10) {
+                    return rating;
+                } else {
+                    continue;
+                }
+            } else {
+                scan.next();
                 continue;
             }
         }
