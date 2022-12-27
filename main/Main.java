@@ -7,6 +7,7 @@ import main.models.Store;
 public class Main {
     
     public static void main(String[] args) {
+
         Movie[] arrMovies = new Movie[] {
             new Movie("The Shawshank Redemption", "Bluray", 9.2),
             new Movie("The Godfather", "Bluray", 9.1),
@@ -24,19 +25,14 @@ public class Main {
             store.addMovie(movie);
         }
 
-        System.out.println("\n********************************MOVIE STORE*******************************\n");
-
-        for (int i = 0; i < store.getStore().size(); i++) {
-            System.out.println((i+1) + "." + store.getMovie(i));
-        }
+        displayStore(store);
 
         Scanner scan = new Scanner(System.in);
-
-        System.out.print("\nTo edit a list, type 'continue': ");
         String cont = scan.next();
 
         while (cont.equals("continue")) {
-
+            
+            System.out.print("\n*Note: Insert any number above index to [Add] movie");
             int index = getIndex(scan);
             scan.nextLine();
 
@@ -45,15 +41,13 @@ public class Main {
             String movieFormat = getMovieFormat(scan);
             double movieRating = getMovieRating(scan);
 
-            store.setMovie(index, new Movie(movieName, movieFormat, movieRating));
-
-            System.out.print("\n********************************MOVIE STORE*******************************\n");
-
-            for (int i = 0; i < store.getStore().size(); i++) {
-                System.out.println((i+1) + "." + store.getMovie(i));
+            if (index < store.getStore().size()) {
+                store.setMovie(index, new Movie(movieName, movieFormat, movieRating));
+            } else {
+                store.addMovie(new Movie(movieName, movieFormat, movieRating));
             }
 
-            System.out.print("\nTo edit a list, type 'continue': ");
+            displayStore(store);
             cont = scan.next();
 
         }
@@ -106,6 +100,14 @@ public class Main {
                 continue;
             }
         }
+    }
+
+    public static void displayStore(Store store) {
+        System.out.println("\n********************************MOVIE STORE*******************************\n");
+        for (int i = 0; i < store.getStore().size(); i++) {
+            System.out.println((i+1) + "." + store.getMovie(i));
+        }
+        System.out.print("To edit a list, type 'continue': ");
     }
 
 }
