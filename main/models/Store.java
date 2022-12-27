@@ -35,7 +35,7 @@ public class Store {
             System.out.println("The movie is on rent.");
             throw new IllegalStateException();
         } else {
-            this.movies.removeIf(movie -> (movie.getName()).equals(name));
+            this.movies.removeIf(movie -> (movie.getName().toLowerCase()).equals(name.toLowerCase()));
         }
     }
 
@@ -59,7 +59,7 @@ public class Store {
 
     public int getMovieIndex(String name) {
         return IntStream.range(0, this.movies.size())
-        .filter(index -> ((this.movies.get(index).getName()).toLowerCase()).equals(name))
+        .filter(index -> ((this.movies.get(index).getName()).toLowerCase()).equals(name.toLowerCase()))
         .findFirst()
         .orElse(-1);
     }

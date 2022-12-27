@@ -11,12 +11,11 @@ public class Main {
         Movie[] arrMovies = new Movie[] {
             new Movie("The Shawshank Redemption", "Bluray", 9.2),
             new Movie("The Godfather", "Bluray", 9.1),
-            new Movie("The Godfather: Part II", "DVD", 9.0),
-            new Movie("The Dark Knight", "Bluray", 9.0),
+            new Movie("The Lord of the Rings: The Fellowship of the Ring", "DVD", 8.8),
             new Movie("Schindler's List", "DVD", 8.9),
             new Movie("The Lord of the Rings: The Return of the King", "Bluray", 8.9),
-            new Movie("Pulp Fiction", "DVD", 8.8),
-            new Movie("The Lord of the Rings: The Fellowship of the Ring", "DVD", 8.8)
+            new Movie("The Dark Knight", "Bluray", 9.0),
+            new Movie("Pulp Fiction", "DVD", 8.8)
         };
 
         Store store = new Store();
@@ -47,7 +46,10 @@ public class Main {
                     break;
                 case "buy":
                     choice = caseBuy(choice, scan, store);
+                case "rent":
+                    choice = caseRent(choice, scan, store);
                 default:
+                    choice = "exit";
                     break;
             }
         }
@@ -97,31 +99,24 @@ public class Main {
         return choice;
     }
 
+    public static String caseRent(String choice, Scanner scan, Store store) {
+        while(choice.equals("rent")) {
+
+            String movieName = getMovieFromStore(scan, store);
+            store.rentMovie(movieName);
+    
+            displayStore(store);
+            choice = getChoice(scan, choice);
+        }
+        return choice;
+    }
+
     public static String getChoice(Scanner scan, String choice) {
         System.out.print("Menu (Please choose one):\n>\t[add]\t[edit]\t[buy]\t[rent]\t[return]\t[exit]\n>\tYour Option: ");
         choice = scan.nextLine();
         choice = choice.toLowerCase();
         return choice;
     }
-
-    /*
-    public static int getIndex(Scanner scan) {
-        while(true) {
-            System.out.print("\nPlease choose which index to change: ");
-            if (scan.hasNextInt()) {
-                int index = scan.nextInt();
-                if (index > 0) {
-                    return index;
-                } else {
-                    continue;
-                }
-            } else {
-                scan.next();
-                continue;
-            }
-        }
-    }
-    */
 
     public static String getMovieName(Scanner scan) {
         while(true) {
